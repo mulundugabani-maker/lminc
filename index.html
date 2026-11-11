@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="LM Inc. is a creative and technical studio at CBU Campus, Zambia: writing, book authoring, research, presentation design, CVs, posters, graphic design and IT support.">
+<title>LM Inc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+  /* Layout: sticky glass nav, hero with the glass logo badge as centrepiece,
+     service cards, a navy research band, process steps, contact card. */
+  :root{
+    --bg:#F7F1E3; --bg-2:#EEE6D2;
+    --ink:#0B2E6B; --ink-soft:#43557A;
+    --gold:#C9963C; --gold-ink:#8A6212;
+    --grad-gold-a:#E2B659; --grad-gold-b:#9A6A1E;
+    --glass:rgba(255,255,255,.62); --glass-strong:rgba(255,255,255,.84); --glass-edge:rgba(255,255,255,.92);
+    --line:rgba(184,134,46,.38);
+    --shadow:0 24px 60px rgba(11,46,107,.14);
+    --band:#0A2860; --band-2:#081F4D; --on-band:#F3F6FF; --on-band-soft:#B9C7E6;
+    --blob-a:rgba(226,182,89,.32); --blob-b:rgba(30,90,190,.16);
+    --btn-ink:#1B1304;
+    --font-display:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --font-body:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --font-accent:'Lora',Georgia,'Times New Roman',serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#050E22; --bg-2:#081A3C;
+      --ink:#EDF2FF; --ink-soft:#A9B9DA;
+      --gold:#E2B659; --gold-ink:#EBC36C;
+      --grad-gold-a:#F4D082; --grad-gold-b:#C9963C;
+      --glass:rgba(255,255,255,.06); --glass-strong:rgba(255,255,255,.1); --glass-edge:rgba(255,255,255,.18);
+      --line:rgba(226,182,89,.38);
+      --shadow:0 24px 60px rgba(0,0,0,.45);
+      --band:#0B2A66; --band-2:#071B45;
+      --blob-a:rgba(226,182,89,.14); --blob-b:rgba(47,111,255,.24);
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#050E22; --bg-2:#081A3C;
+    --ink:#EDF2FF; --ink-soft:#A9B9DA;
+    --gold:#E2B659; --gold-ink:#EBC36C;
+    --grad-gold-a:#F4D082; --grad-gold-b:#C9963C;
+    --glass:rgba(255,255,255,.06); --glass-strong:rgba(255,255,255,.1); --glass-edge:rgba(255,255,255,.18);
+    --line:rgba(226,182,89,.38);
+    --shadow:0 24px 60px rgba(0,0,0,.45);
+    --band:#0B2A66; --band-2:#071B45;
+    --blob-a:rgba(226,182,89,.14); --blob-b:rgba(47,111,255,.24);
+    color-scheme:dark;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; font-family:var(--font-body); font-size:16px; line-height:1.6; color:var(--ink);
+    background-color:var(--bg);
+    background-image:linear-gradient(170deg,var(--bg) 0%,var(--bg-2) 100%);
+    overflow-x:hidden;
+  }
+  body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:30; background:var(--bg);}
+  h1,h2,h3,p{margin:0;}
+  a{color:inherit;}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:3px; border-radius:10px;}
+  .wrap{width:100%; max-width:1220px; margin-inline:auto;
+    padding-left:max(20px,env(safe-area-inset-left,0px)); padding-right:max(20px,env(safe-area-inset-right,0px));}
+  .page{position:relative; overflow:hidden;}
+  .blob{position:absolute; border-radius:50%; filter:blur(70px); pointer-events:none;}
+  .blob.a{width:620px; height:620px; top:-160px; left:-200px; background:var(--blob-a);}
+  .blob.b{width:700px; height:700px; top:120px; right:-260px; background:var(--blob-b);}
+
+  /* nav */
+  header.top{position:sticky; top:env(safe-area-inset-top,0px); z-index:20;}
+  .nav{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:12px; padding:9px 10px 9px 16px;
+    border-radius:999px; background:var(--glass-strong); border:1px solid var(--glass-edge);
+    -webkit-backdrop-filter:blur(18px); backdrop-filter:blur(18px); box-shadow:var(--shadow);}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:700; letter-spacing:.5px;}
+  .brand svg{width:38px; height:38px; flex:none;}
+  .brand span small{display:block; font-size:.62rem; letter-spacing:.28em; font-weight:500; color:var(--ink-soft); margin-top:-2px;}
+  .nav-links{display:flex; gap:6px; list-style:none; margin:0; padding:0;}
+  .nav-links a{display:block; padding:8px 14px; border-radius:999px; text-decoration:none; font-size:.92rem; font-weight:500; color:var(--ink-soft);}
+  .nav-links a:hover{color:var(--ink); background:var(--glass);}
+
+  /* buttons */
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:14px 26px; border-radius:999px; border:1.5px solid transparent;
+    font:600 1rem/1 var(--font-body); text-decoration:none; cursor:pointer; transition:transform .2s, box-shadow .2s, background .2s;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-gold{color:var(--btn-ink); background:linear-gradient(135deg,#F1CD7C,#C9963C 60%,#A8741E); box-shadow:0 10px 26px rgba(201,150,60,.38);}
+  .btn-gold:hover{box-shadow:0 14px 32px rgba(201,150,60,.5);}
+  .btn-glass{color:var(--ink); background:var(--glass); border-color:var(--line); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);}
+  .btn-glass:hover{background:var(--glass-strong);}
+  .btn.small{padding:11px 20px; font-size:.9rem;}
+
+  /* shared type */
+  .eyebrow{display:flex; align-items:center; gap:14px; font-size:.78rem; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:var(--gold-ink);}
+  .eyebrow::before{content:""; width:44px; height:3px; border-radius:3px; background:linear-gradient(90deg,var(--grad-gold-a),var(--grad-gold-b));}
+  .grad{background:linear-gradient(180deg,var(--grad-gold-a),var(--grad-gold-b)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  h2.title{font-size:clamp(1.9rem,4vw,3rem); line-height:1.1; font-weight:700; letter-spacing:-.02em; text-wrap:balance; margin-top:14px;}
+  p.lede{font-size:1.08rem; color:var(--ink-soft); max-width:60ch; margin-top:16px;}
+  .section{padding-block:clamp(64px,9vw,110px);}
+  [id]{scroll-margin-top:96px;}
+
+  /* hero */
+  .hero{padding-block:clamp(36px,6vw,72px) clamp(56px,8vw,96px); display:grid; grid-template-columns:1.08fr .92fr; gap:clamp(24px,5vw,64px); align-items:center;}
+  .hero h1{font-size:clamp(2.7rem,6.4vw,5.2rem); line-height:1.02; font-weight:700; letter-spacing:-.035em; margin-top:22px; text-wrap:balance;}
+  .hero p.lede{font-size:1.15rem; margin-top:24px;}
+  .cta-row{display:flex; flex-wrap:wrap; gap:14px; margin-top:34px;}
+  .quick{display:flex; flex-wrap:wrap; gap:10px 26px; margin-top:34px; font-size:.95rem; color:var(--ink-soft);}
+  .quick b{color:var(--ink); font-weight:600;}
+
+  .stage{position:relative; width:100%; max-width:540px; aspect-ratio:1/1; margin-inline:auto;}
+  .ring{position:absolute; border-radius:50%;}
+  .ring.dash{inset:0; border:2px dotted var(--line); animation:spin 70s linear infinite;}
+  .ring.thin{inset:9%; border:1.5px solid var(--line); opacity:.7;}
+  .tilt{position:absolute; inset:14%; transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)); transition:transform .18s ease-out;}
+  .tilt svg{width:100%; height:100%; display:block; filter:drop-shadow(0 30px 34px rgba(11,46,107,.28)) drop-shadow(0 8px 12px rgba(11,46,107,.14));}
+  .chip{position:absolute; display:flex; align-items:center; gap:9px; padding:9px 16px 9px 11px; border-radius:999px; font-size:.86rem; font-weight:600; color:var(--ink);
+    background:var(--glass-strong); border:1px solid var(--glass-edge); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); box-shadow:var(--shadow); animation:drift 7s ease-in-out infinite;}
+  .chip i{display:grid; place-items:center; width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#F1CD7C,#B8862E); color:#1B1304;}
+  .chip svg{width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
+  .chip.c1{left:-2%; top:17%;} .chip.c2{right:-3%; top:8%; animation-delay:-2s;}
+  .chip.c3{left:1%; bottom:12%; animation-delay:-4s;} .chip.c4{right:-1%; bottom:19%; animation-delay:-1s;}
+  @keyframes drift{0%,100%{transform:translateY(0)} 50%{transform:translateY(-11px)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* services */
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:22px; margin-top:44px;}
+  .card{position:relative; padding:30px 28px 28px; border-radius:26px; background:var(--glass); border:1px solid var(--glass-edge);
+    -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px); box-shadow:var(--shadow); transition:transform .25s, border-color .25s;}
+  .card::before{content:""; position:absolute; top:0; left:26px; right:26px; height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);}
+  .card:hover{transform:translateY(-5px); border-color:var(--line);}
+  .ico{display:grid; place-items:center; width:54px; height:54px; border-radius:16px; background:linear-gradient(135deg,#F7DE9C,#C9963C); color:#1B1304; box-shadow:0 8px 18px rgba(201,150,60,.32);}
+  .ico svg{width:26px; height:26px; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round;}
+  .card h3{font-size:1.28rem; font-weight:600; margin-top:20px; letter-spacing:-.01em;}
+  .card p{color:var(--ink-soft); margin-top:10px; font-size:.98rem;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; padding:0; list-style:none;}
+  .tags li{font-size:.76rem; font-weight:600; padding:5px 12px; border-radius:999px; border:1px solid var(--line); color:var(--gold-ink);}
+
+  /* computer services */
+  .pc-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,64px); align-items:start;}
+  .pc-photos{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:34px;}
+  .plate{margin:0; padding:12px 12px 14px; border-radius:24px; background:#fff; border:1px solid var(--glass-edge); box-shadow:var(--shadow); transform:rotate(-1.5deg);}
+  .plate:nth-child(2){transform:rotate(2deg); margin-top:20px;}
+  .plate img{display:block; width:100%; aspect-ratio:4/3; object-fit:contain; border-radius:14px; background:#fff;}
+  .plate figcaption{margin-top:10px; text-align:center; font-size:.8rem; font-weight:600; letter-spacing:.04em; color:#43557A;}
+  .pl-title{font-size:clamp(1.6rem,3vw,2.2rem); font-weight:700; letter-spacing:-.02em; margin-top:12px;}
+  .prices{list-style:none; margin:26px 0 0; padding:0; display:grid; gap:12px;}
+  .prices li{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 18px 16px 22px; border-radius:20px; background:var(--glass); border:1px solid var(--glass-edge); box-shadow:var(--shadow);}
+  .prices b{display:block; font-weight:600; font-size:1.05rem;}
+  .prices span{display:block; font-size:.88rem; color:var(--ink-soft);}
+  .prices em{font-style:normal; flex:none; padding:9px 18px; border-radius:14px; font-weight:700; font-size:1.05rem; color:var(--btn-ink); background:linear-gradient(135deg,#F7D58A,#E8A93A);}
+  .pc-note{margin-top:18px;}
+  @media (max-width:900px){.pc-grid{grid-template-columns:1fr;}}
+
+  /* our work */
+  .masonry{columns:3 280px; column-gap:22px; margin-top:44px;}
+  .work{margin:0 0 22px; break-inside:avoid; padding:12px 12px 16px; border-radius:26px; background:var(--glass); border:1px solid var(--glass-edge); box-shadow:var(--shadow);}
+  .work img{display:block; width:100%; height:auto; border-radius:16px;}
+  .work figcaption{margin-top:12px; padding-inline:6px; font-size:.9rem; font-weight:600; color:var(--ink-soft);}
+  .line b.mail{font-size:1.02rem; overflow-wrap:anywhere;}
+
+  /* research band */
+  .wave{display:block; width:100%; height:clamp(36px,6vw,80px);}
+  .band{background:linear-gradient(180deg,var(--band),var(--band-2)); color:var(--on-band); position:relative;}
+  .band .eyebrow{color:#E8BE62;}
+  .band p.lede{color:var(--on-band-soft);}
+  .steps{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr)); gap:16px; margin-top:44px; padding:0; list-style:none; counter-reset:s;}
+  .steps li{counter-increment:s; padding:22px 20px; border-radius:22px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16);}
+  .steps li::before{content:counter(s); display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#F1CD7C,#B8862E); color:#1B1304; font-weight:700; font-size:.9rem;}
+  .steps b{display:block; margin-top:14px; font-weight:600; font-size:1.02rem;}
+  .steps span{display:block; margin-top:6px; font-size:.88rem; color:var(--on-band-soft);}
+  .promise{margin-top:28px; padding:22px 26px; border-radius:22px; border:1px dashed rgba(232,190,98,.6); display:flex; gap:16px; align-items:flex-start; background:rgba(255,255,255,.04);}
+  .promise svg{flex:none; width:28px; height:28px; fill:none; stroke:#E8BE62; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; margin-top:2px;}
+  .promise p{font-size:.98rem; color:var(--on-band);}
+  .promise p b{color:#E8BE62; font-weight:600;}
+  .band .section{padding-top:clamp(36px,5vw,56px);}
+
+  /* process + why */
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,64px); align-items:start;}
+  .flow{display:grid; gap:14px; margin-top:30px; padding:0; list-style:none; counter-reset:f;}
+  .flow li{counter-increment:f; display:grid; grid-template-columns:44px 1fr; gap:16px; padding:18px 20px; border-radius:20px; background:var(--glass); border:1px solid var(--glass-edge);}
+  .flow li::before{content:counter(f); display:grid; place-items:center; width:44px; height:44px; border-radius:50%; border:1.5px solid var(--gold); color:var(--gold-ink); font-weight:700;}
+  .flow b{display:block; font-weight:600;} .flow span{color:var(--ink-soft); font-size:.94rem;}
+  .why{display:grid; gap:14px; margin-top:30px;}
+  .why div{padding:22px 24px; border-radius:22px; background:var(--glass); border:1px solid var(--glass-edge);}
+  .why b{display:block; font-weight:600; font-size:1.05rem;} .why span{display:block; margin-top:6px; color:var(--ink-soft); font-size:.95rem;}
+
+  /* contact */
+  .contact-card{display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,4vw,56px); padding:clamp(28px,5vw,56px); border-radius:34px;
+    background:var(--glass-strong); border:1px solid var(--glass-edge); box-shadow:var(--shadow); -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px);}
+  .contact-card h2{font-size:clamp(1.9rem,4vw,3rem); line-height:1.08; font-weight:700; letter-spacing:-.02em; text-wrap:balance; margin-top:14px;}
+  .lines{display:grid; gap:12px; margin-top:28px;}
+  .line{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+  .line .dot{display:grid; place-items:center; width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,#F1CD7C,#B8862E); color:#1B1304;}
+  .line .dot svg{width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
+  .line small{display:block; font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft);}
+  .line b{font-size:1.25rem; font-weight:700; letter-spacing:.02em; user-select:all;}
+  .copy{margin-left:auto; padding:8px 16px; font-size:.82rem;}
+  form{display:grid; gap:14px;}
+  label{display:grid; gap:6px; font-size:.82rem; font-weight:600; letter-spacing:.04em; color:var(--ink-soft);}
+  input,select,textarea{width:100%; padding:13px 16px; border-radius:16px; border:1.5px solid var(--line); background:var(--glass); color:var(--ink); font:400 1rem/1.4 var(--font-body);}
+  textarea{min-height:104px; resize:vertical;}
+  input::placeholder,textarea::placeholder{color:var(--ink-soft); opacity:.7;}
+  .fine{font-size:.82rem; color:var(--ink-soft);}
+
+  footer{padding-block:44px 56px; border-top:1px solid var(--line);}
+  .foot{display:flex; flex-wrap:wrap; gap:22px; align-items:center; justify-content:space-between;}
+  .foot nav{display:flex; flex-wrap:wrap; gap:6px 22px; font-size:.92rem; color:var(--ink-soft);}
+  .foot nav a{text-decoration:none;} .foot nav a:hover{color:var(--ink);}
+  .foot small{color:var(--ink-soft);}
+
+  .float-wa{position:fixed; right:calc(16px + env(safe-area-inset-right,0px)); bottom:calc(16px + env(safe-area-inset-bottom,0px)); z-index:25;
+    display:flex; align-items:center; gap:10px; padding:13px 20px; border-radius:999px; text-decoration:none; font-weight:600; font-size:.92rem;
+    color:var(--btn-ink); background:linear-gradient(135deg,#F1CD7C,#C9963C 60%,#A8741E); box-shadow:0 12px 30px rgba(0,0,0,.28);}
+
+  @media (max-width:900px){
+    .hero,.two,.contact-card{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .stage{max-width:430px;}
+    .chip{font-size:.78rem; padding:7px 13px 7px 9px;}
+  }
+  @media (max-width:480px){
+    .brand span small{display:none;}
+    .eyebrow{letter-spacing:.16em; font-size:.7rem; gap:10px;}
+    .eyebrow::before{width:28px;}
+    .cta-row .btn{flex:1 1 100%;}
+    .float-wa span{display:none;} .float-wa{padding:14px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .chip,.ring.dash{animation:none;} .tilt{transition:none;} .btn,.card{transition:none;}
+  }
+</style>
+
+</head>
+<body>
+<div class="page">
+  <div class="blob a"></div><div class="blob b"></div>
+
+  <header class="top">
+    <div class="wrap">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="LM Inc home">
+          <svg viewBox="166 166 692 692" aria-hidden="true">
+            <circle cx="512" cy="512" r="330" fill="url(#g-disc)"/>
+            <circle cx="512" cy="512" r="334" fill="none" stroke="url(#g-gold)" stroke-width="30"/>
+            <text x="512" y="592" text-anchor="middle" font-size="250" font-weight="700" fill="url(#g-navy)" style="font-family:var(--font-display)">LM</text>
+          </svg>
+          <span>LM INC.<small>DESIGN STUDIO</small></span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#computers">Computer services</a></li>
+          <li><a href="#work">Our work</a></li>
+          <li><a href="#students">Student research</a></li>
+          <li><a href="#process">How it works</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a class="btn btn-gold small" href="https://wa.me/260971984483" target="_blank" rel="noopener">WhatsApp us</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="wrap hero">
+      <div>
+        <div class="eyebrow">Author · Writer · Design · IT Support</div>
+        <h1>Words that work.<br><span class="grad">Ideas that last.</span></h1>
+        <p class="lede">LM Inc. is a creative and technical studio on the Copperbelt University campus in Zambia. We write, research, design and fix, so your work looks and runs the way it should.</p>
+        <div class="cta-row">
+          <a class="btn btn-gold" href="https://wa.me/260971984483?text=Hello%20LM%20Inc.%2C%20I%27d%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener">Start a project on WhatsApp</a>
+          <a class="btn btn-glass" href="#services">See what we do</a>
+        </div>
+        <div class="quick">
+          <span>Call / WhatsApp <b>0971 984 483</b></span>
+          <span>Based at <b>CBU Campus</b></span>
+        </div>
+      </div>
+
+      <div class="stage" id="stage">
+        <div class="ring dash"></div><div class="ring thin"></div>
+        <div class="tilt" id="tilt">
+          <svg viewBox="166 166 692 692" role="img" aria-label="LM Inc. logo">
+            <defs>
+              <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0CB78"/><stop offset=".5" stop-color="#C9963C"/><stop offset="1" stop-color="#9A6A1E"/></linearGradient>
+              <linearGradient id="g-goldh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C9963C" stop-opacity="0"/><stop offset=".5" stop-color="#C9963C"/><stop offset="1" stop-color="#C9963C" stop-opacity="0"/></linearGradient>
+              <linearGradient id="g-navy" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E5FB8"/><stop offset="1" stop-color="#0A2A66"/></linearGradient>
+              <linearGradient id="g-shine" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+              <linearGradient id="g-wave" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity=".3"/></linearGradient>
+              <linearGradient id="g-disc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".6" stop-color="#F3F6FB"/><stop offset="1" stop-color="#F9FAFD"/></linearGradient>
+              <clipPath id="g-clip"><circle cx="512" cy="512" r="318"/></clipPath>
+            </defs>
+            <circle cx="512" cy="512" r="330" fill="url(#g-disc)"/>
+            <circle cx="512" cy="512" r="338" fill="none" stroke="url(#g-gold)" stroke-width="16"/>
+            <circle cx="512" cy="512" r="322" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="1.5"/>
+            <circle cx="512" cy="512" r="304" fill="none" stroke="#C9963C" stroke-opacity=".45" stroke-width="1.2"/>
+            <g clip-path="url(#g-clip)">
+              <path d="M150 742 C300 700 420 770 560 742 S800 700 880 728 L880 900 L150 900Z" fill="url(#g-wave)"/>
+              <path d="M150 742 C300 700 420 770 560 742 S800 700 880 728" fill="none" stroke="url(#g-gold)" stroke-width="5" stroke-linecap="round"/>
+            </g>
+            <path d="M232 400 A292 292 0 0 1 470 226" fill="none" stroke="url(#g-shine)" stroke-width="9" stroke-linecap="round" opacity=".9"/>
+            <g transform="translate(512 322)">
+              <path d="M-46 -50 A66 66 0 1 0 46 -50" fill="none" stroke="url(#g-gold)" stroke-width="6" stroke-linecap="round"/>
+              <path d="M-34 40 L-34 -52 L-14 -52 L0 -10 L14 -52 L34 -52 L34 40 L18 40 L18 -18 L6 18 L-6 18 L-18 -18 L-18 40Z" fill="url(#g-gold)"/>
+            </g>
+            <text x="512" y="566" text-anchor="middle" font-size="196" font-weight="700" letter-spacing="6" fill="url(#g-navy)" style="font-family:var(--font-display)">LM</text>
+            <rect x="432" y="610" width="160" height="2.5" fill="url(#g-goldh)"/>
+            <text x="520" y="676" text-anchor="middle" font-size="36" font-weight="600" letter-spacing="16" fill="#B8862E" style="font-family:var(--font-display)">INC.</text>
+          </svg>
+        </div>
+        <div class="chip c1"><i><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></i>Writing</div>
+        <div class="chip c2"><i><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></i>Research</div>
+        <div class="chip c3"><i><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8"/></svg></i>Design</div>
+        <div class="chip c4"><i><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></svg></i>IT Support</div>
+      </div>
+    </section>
+
+    <section class="section wrap" id="services">
+      <div class="eyebrow">What we do</div>
+      <h2 class="title">One studio for your words, visuals and tech.</h2>
+      <p class="lede">Pick one service or combine them. Tell us what you need and we'll tell you what it takes.</p>
+      <div class="grid">
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></div>
+          <h3>Writing Services</h3>
+          <p>Clear, polished writing for people, brands and businesses: web copy, articles, speeches, bios and professional documents.</p>
+          <ul class="tags"><li>Copywriting</li><li>Editing</li><li>Proofreading</li></ul>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20V3H6.5A2.5 2.5 0 004 5.5v14z"/><path d="M20 17v4H6.5A2.5 2.5 0 014 18.5"/></svg></div>
+          <h3>Book Authoring</h3>
+          <p>Support for authors from the first outline to a finished manuscript: structure, editing and formatting for print and digital.</p>
+          <ul class="tags"><li>Planning</li><li>Editing</li><li>Formatting</li></ul>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+          <h3>Research &amp; Content</h3>
+          <p>Topic and market research turned into content you can use: briefs, summaries, articles and well-organised findings.</p>
+          <ul class="tags"><li>Research briefs</li><li>Content</li></ul>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8"/><path d="M7 12l3-3 3 2 4-4"/></svg></div>
+          <h3>Presentation Design</h3>
+          <p>Professional PowerPoint decks with strong layout, clean charts and visuals for pitches, projects and events.</p>
+          <ul class="tags"><li>PowerPoint</li><li>Charts</li><li>Visuals</li></ul>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+          <h3>Reports &amp; Data Visualisation</h3>
+          <p>Your data organised into clear tables and graphs, inside a well-structured, professionally formatted report.</p>
+          <ul class="tags"><li>Formatting</li><li>Graphs</li><li>Tables</li></ul>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></svg></div>
+          <h3>IT Support</h3>
+          <p>Computer repair, Windows and software setup, antivirus, networks and everyday troubleshooting, so your tech keeps working.</p>
+          <ul class="tags"><li>Repairs</li><li>Setup</li><li>Security</li></ul>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8M8 9h2"/></svg></div>
+          <h3>CVs &amp; Cover Letters</h3>
+          <p>Professional CVs and cover letters that present your experience clearly, formatted to stand out for jobs, internships and scholarships.</p>
+          <ul class="tags"><li>CV design</li><li>Cover letters</li><li>Profiles</li></ul>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <h3>Posters &amp; Graphic Design</h3>
+          <p>Eye-catching posters, flyers, banners, logos and social media graphics for events, businesses, research and campaigns.</p>
+          <ul class="tags"><li>Posters</li><li>Flyers</li><li>Logos</li><li>Social media</li></ul>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg></div>
+          <h3>Student Document Support</h3>
+          <p>Help with the look and finish of your own assignments: formatting, referencing, proofreading and structure feedback. The ideas and writing stay yours.</p>
+          <ul class="tags"><li>Formatting</li><li>Referencing</li><li>Proofreading</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section wrap" id="computers" style="padding-top:0">
+      <div class="pc-grid">
+        <div>
+          <div class="eyebrow">Computer services</div>
+          <h2 class="title">Quality tech support for your PC.</h2>
+          <p class="lede">Windows installs, Office activation, virus removal and more. Affordable pricing, genuine results and no repeat visits.</p>
+          <div class="pc-photos">
+            <figure class="plate"><img src="pc-windows10.jpg" alt="Desktop computer with keyboard, mouse and monitor showing the Windows 10 start screen"><figcaption>Windows 10 &amp; Office</figcaption></figure>
+            <figure class="plate"><img src="pc-windows11.jpg" alt="Desktop computer with monitor showing the Windows 11 desktop"><figcaption>Windows 11 Pro</figcaption></figure>
+          </div>
+        </div>
+        <div>
+          <div class="eyebrow">Price list</div>
+          <h3 class="pl-title">What we offer</h3>
+          <ul class="prices">
+            <li><div><b>Windows Installation</b><span>Win 11 Pro + Office</span></div><em>K75</em></li>
+            <li><div><b>Office Installation</b><span>Word, Excel, PowerPoint</span></div><em>K40</em></li>
+            <li><div><b>Office Activation</b><span>Genuine &amp; lasting</span></div><em>K35</em></li>
+            <li><div><b>Windows Activation</b><span>Genuine &amp; lasting</span></div><em>K35</em></li>
+            <li><div><b>Updates &amp; Optimization</b><span>Fix slow PCs</span></div><em>K50</em></li>
+            <li><div><b>Antivirus Installation</b><span>Avast &amp; others</span></div><em>K50</em></li>
+          </ul>
+          <p class="fine pc-note">Prices are in Zambian kwacha (K). Need something that isn't listed? Message us on WhatsApp.</p>
+          <div class="cta-row">
+            <a class="btn btn-gold" href="https://wa.me/260971984483?text=Hello%20LM%20Inc.%2C%20I%27d%20like%20to%20book%20a%20computer%20service." target="_blank" rel="noopener">Book a computer service</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 40 C240 6 480 74 760 40 S1250 2 1440 36 L1440 80 L0 80Z" fill="var(--band)"/>
+      <path d="M0 40 C240 6 480 74 760 40 S1250 2 1440 36" fill="none" stroke="#D9A94E" stroke-width="4"/>
+    </svg>
+    <div class="band" id="students">
+      <section class="section wrap">
+        <div class="eyebrow">Student research support</div>
+        <h2 class="title">Got your research data? Let's make it presentation-ready.</h2>
+        <p class="lede">Group projects and research assignments often stall after the data is collected. We help you organise, visualise, format and present the findings you already have.</p>
+        <ol class="steps">
+          <li><b>Organise your data</b><span>Clean, structured questionnaire data that is ready to analyse.</span></li>
+          <li><b>Visualise results</b><span>Clear graphs, charts and tables for each finding.</span></li>
+          <li><b>Format the report</b><span>A professional layout that reads clearly.</span></li>
+          <li><b>Design the slides</b><span>A polished PowerPoint built around your findings.</span></li>
+          <li><b>Prepare to present</b><span>Key points that are easy to explain with confidence.</span></li>
+        </ol>
+        <div class="promise">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.4 8.2-8 9-4.6-.8-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          <p><b>Your research stays yours.</b> We work with the data you collected. We don't write assignments, answer questionnaires or make up data.</p>
+        </div>
+      </section>
+    </div>
+
+    <section class="section wrap" id="process">
+      <div class="two">
+        <div>
+          <div class="eyebrow">How it works</div>
+          <h2 class="title">From first message to finished files.</h2>
+          <ol class="flow">
+            <li><div><b>Tell us what you need</b><span>Message or call us with your idea, deadline and any files you have.</span></div></li>
+            <li><div><b>We scope it and give you a quote</b><span>You'll know the plan, the timing and the cost before we start.</span></div></li>
+            <li><div><b>We create, you review</b><span>You see the work in progress and ask for changes.</span></div></li>
+            <li><div><b>You get the final files</b><span>Ready to send, print, present or publish.</span></div></li>
+          </ol>
+        </div>
+        <div>
+          <div class="eyebrow">Why LM Inc.</div>
+          <h2 class="title">A small studio with a direct line.</h2>
+          <div class="why">
+            <div><b>Words, visuals and tech under one roof</b><span>No hunting for a writer, a designer and a technician separately.</span></div>
+            <div><b>Plain talk, clear next steps</b><span>You always know what's happening and what we need from you.</span></div>
+            <div><b>Local and reachable</b><span>We're on the CBU campus and a WhatsApp message away.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap" id="work">
+      <div class="eyebrow">Our work</div>
+      <h2 class="title">Designs made at LM Inc.</h2>
+      <p class="lede">A few of the posters, banners and brand pieces we've put together.</p>
+      <div class="masonry">
+        <figure class="work"><img src="work-pricelist.jpg" alt="Tech support price list poster with services and prices in kwacha" loading="lazy"><figcaption>Tech support price list</figcaption></figure>
+        <figure class="work"><img src="work-research.jpg" alt="Research support banner with services and contact details" loading="lazy"><figcaption>Research support banner</figcaption></figure>
+        <figure class="work"><img src="work-cover.jpg" alt="LM Inc Facebook cover banner" loading="lazy"><figcaption>Facebook cover banner</figcaption></figure>
+        <figure class="work"><img src="work-logo.jpg" alt="LM Inc liquid glass logo" loading="lazy"><figcaption>LM Inc. brand logo</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="wrap" id="contact" style="padding-bottom:clamp(64px,9vw,110px)">
+      <div class="contact-card">
+        <div>
+          <div class="eyebrow">Contact</div>
+          <h2>Let's bring your ideas to life.</h2>
+          <p class="lede">Tell us what you're working on. We'll reply on WhatsApp with next steps.</p>
+          <div class="lines">
+            <div class="line">
+              <span class="dot"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg></span>
+              <div><small>Call / WhatsApp</small><b id="phone">0971 984 483</b></div>
+              <button class="btn btn-glass copy" type="button" id="copy">Copy number</button>
+            </div>
+            <div class="line">
+              <span class="dot"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <div><small>We work with you</small><b>CBU Campus, Zambia</b></div>
+            </div>
+            <div class="line">
+              <span class="dot"><svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M22 6l-10 7L2 6"/></svg></span>
+              <div><small>Email</small><b class="mail" id="mail">lamentmulundu86@gmail.com</b></div>
+              <button class="btn btn-glass copy" type="button" id="copy-mail">Copy email</button>
+            </div>
+          </div>
+        </div>
+        <form onsubmit="return false" aria-label="Message builder">
+          <label for="f-name">Your name<input id="f-name" type="text" placeholder="e.g. Chanda" autocomplete="name"></label>
+          <label for="f-service">What do you need?
+            <select id="f-service">
+              <option>Writing Services</option>
+              <option>Book Authoring</option>
+              <option>Research &amp; Content</option>
+              <option>Presentation Design</option>
+              <option>Reports &amp; Data Visualisation</option>
+              <option>CVs &amp; Cover Letters</option>
+              <option>Posters &amp; Graphic Design</option>
+              <option>Student Document Support</option>
+              <option>IT Support</option>
+              <option>Something else</option>
+            </select>
+          </label>
+          <label for="f-msg">Tell us a little more<textarea id="f-msg" placeholder="Your idea, your deadline, any details that help."></textarea></label>
+          <a class="btn btn-gold" id="wa-send" href="https://wa.me/260971984483" target="_blank" rel="noopener">Open WhatsApp with this message</a>
+          <p class="fine">This opens WhatsApp with your message ready. Nothing is sent until you press send there.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <a class="brand" href="#top" aria-label="LM Inc home">
+        <svg viewBox="166 166 692 692" aria-hidden="true">
+          <circle cx="512" cy="512" r="330" fill="url(#g-disc)"/>
+          <circle cx="512" cy="512" r="334" fill="none" stroke="url(#g-gold)" stroke-width="30"/>
+          <text x="512" y="592" text-anchor="middle" font-size="250" font-weight="700" fill="url(#g-navy)" style="font-family:var(--font-display)">LM</text>
+        </svg>
+        <span>LM INC.<small>DESIGN STUDIO</small></span>
+      </a>
+      <nav aria-label="Footer"><a href="#services">Services</a><a href="#computers">Computer services</a><a href="#work">Our work</a><a href="#students">Student research</a><a href="#process">How it works</a><a href="#contact">Contact</a></nav>
+      <small>© 2026 LM Inc. · CBU Campus, Zambia</small>
+    </div>
+  </footer>
+
+  <a class="float-wa" href="https://wa.me/260971984483" target="_blank" rel="noopener" aria-label="Chat with LM Inc on WhatsApp">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 01-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1121 11.5z"/></svg>
+    <span>Chat on WhatsApp</span>
+  </a>
+</div>
+
+<script>
+  // Badge follows the pointer a little
+  (function(){
+    var stage=document.getElementById('stage'), tilt=document.getElementById('tilt');
+    if(!stage||!tilt||window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    stage.addEventListener('pointermove',function(e){
+      var r=stage.getBoundingClientRect();
+      var x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      tilt.style.setProperty('--ry',(x*14).toFixed(2)+'deg');
+      tilt.style.setProperty('--rx',(-y*14).toFixed(2)+'deg');
+    });
+    stage.addEventListener('pointerleave',function(){
+      tilt.style.setProperty('--ry','0deg'); tilt.style.setProperty('--rx','0deg');
+    });
+  })();
+
+  // WhatsApp message builder
+  (function(){
+    var n=document.getElementById('f-name'), s=document.getElementById('f-service'), m=document.getElementById('f-msg'), a=document.getElementById('wa-send');
+    function build(){
+      var who=(n.value||'').trim()||'a new client';
+      var text='Hello LM Inc., I am '+who+'. I need help with: '+s.value+'.'+((m.value||'').trim()?' '+m.value.trim():'');
+      a.href='https://wa.me/260971984483?text='+encodeURIComponent(text);
+    }
+    [n,s,m].forEach(function(el){el.addEventListener('input',build); el.addEventListener('change',build);});
+    build();
+  })();
+
+  // Copy email, with a select fallback
+  (function(){
+    var b=document.getElementById('copy-mail'), p=document.getElementById('mail');
+    if(!b||!p) return;
+    b.addEventListener('click',function(){
+      function done(t){b.textContent=t; setTimeout(function(){b.textContent='Copy email';},1800);}
+      function sel(){var r=document.createRange(); r.selectNodeContents(p); var g=window.getSelection(); g.removeAllRanges(); g.addRange(r); done('Email selected');}
+      try{
+        navigator.clipboard.writeText('lamentmulundu86@gmail.com').then(function(){done('Copied');},sel);
+      }catch(e){sel();}
+    });
+  })();
+
+  // Copy number, with a select fallback
+  (function(){
+    var b=document.getElementById('copy'), p=document.getElementById('phone');
+    b.addEventListener('click',function(){
+      function done(t){b.textContent=t; setTimeout(function(){b.textContent='Copy number';},1800);}
+      function sel(){var r=document.createRange(); r.selectNodeContents(p); var g=window.getSelection(); g.removeAllRanges(); g.addRange(r); done('Number selected');}
+      try{
+        navigator.clipboard.writeText('0971984483').then(function(){done('Copied');},sel);
+      }catch(e){sel();}
+    });
+  })();
+</script>
+
+</body>
+</html>
