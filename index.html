@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B2E6B">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <meta name="description" content="LM Inc. is a creative and technical studio at CBU Campus, Zambia: writing, book authoring, research, presentation design, CVs, posters, graphic design and IT support.">
 <title>LM Inc</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -589,6 +593,11 @@
       }catch(e){sel();}
     });
   })();
+
+  // Make the site installable as an app
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+  }
 </script>
 
 </body>

@@ -1,0 +1,25 @@
+{
+  "id": "./",
+  "name": "LM Inc",
+  "short_name": "LM Inc",
+  "description": "Writing, research, design and IT support at CBU Campus, Zambia.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F7F1E3",
+  "theme_color": "#0B2E6B",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
